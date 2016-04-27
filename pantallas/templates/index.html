@@ -1,0 +1,196 @@
+{%extends 'base.html'%}
+{% load static from staticfiles %} 
+{% block title %}UPVT{% endblock%}
+{% block navbar %}
+	<div class="navbar navbar-inverse navbar-fixed-top" role="banner"> 
+		<div class="container"> 
+			<div class="navbar-header"> 
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+				</button> 
+				<a class="navbar-brand" href="#"><h1><img src="{% static 'images/gob.jpg' %}" alt="logo"></h1></a> 
+				
+
+
+			</div> 
+			<div class="collapse navbar-collapse"> 
+				<ul class="nav navbar-nav navbar-right"> 
+					<li class="scroll active"><a href="{% url 'home:home' %}">Inicio</a></li> 
+					<li class="scroll"><a href="{% url 'careers:carreras' %}">Carreras</a></li> 
+					<li class="scroll"><a href="{% url 'academics:academics' %}">Academicos</a></li> 
+					<li class="scroll"><a href="{% url 'vacancies:index'%}">Empleos</a></li> 
+					<li class="scroll"><a href="{% url 'events:index'%}">Eventos</a></li> 
+					<li class="scroll"><a href="{% url 'gripbox:index'%}">Buzon de sugerencias</a></li> 
+					
+				</ul> 
+				<img style="margin-top: 15px;" src="{% static 'images/Logo.jpg' %}" alt="Logo.jpg">
+			</div>
+		</div> 
+
+	</div><!--/navbar--> 
+
+{% endblock %}
+{% block content%}
+
+
+	<section id="home">
+		<div class="home-pattern"></div>
+		<div id="main-carousel" class="carousel slide" data-ride="carousel"> 
+			<ol class="carousel-indicators">
+			
+				{% for _ in slides %}
+					{% if forloop.counter0 == 0 %}
+				    <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
+				    {% else %}
+				    <li data-target="#main-carousel" data-slide-to="{{forloop.counter0}}"></li>
+				   	{% endif %}
+
+					
+				{% endfor %}
+
+			</ol><!--/.carousel-indicators--> 
+			<div class="carousel-inner">
+
+
+			{% for slide in slides %}
+				{% if forloop.counter0 == 0 %}
+				<div class="item active" style="background-image: url({{slide.docfile.url}})"> 
+						<div class="carousel-caption"> <div> 
+							<h2 class="heading animated bounceInDown">{{slide.name}}</h2> 
+								<p class="animated bounceInUp">{{slide.description}}</p> 
+								<a class="btn btn-default slider-btn animated fadeIn" href="{{slide.link}}">Enlase</a>  
+						</div> 
+					</div> 
+				</div> 
+				{% else %}
+				<div class="item" style="background-image: url({{slide.docfile.url}})"> 
+						<div class="carousel-caption"> <div> 
+							<h2 class="heading animated bounceInDown">{{slide.name}}</h2> 
+								<p class="animated bounceInUp">{{slide.description}}</p> 
+								<a class="btn btn-default slider-btn animated fadeIn" href="{{slide.link}}">Enlase</a>  
+						</div> 
+					</div> 
+				</div> 
+				{% endif %}
+			{% endfor %}
+			
+		</div><!--/.carousel-inner-->
+
+		<a class="carousel-left member-carousel-control hidden-xs" href="#main-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+		<a class="carousel-right member-carousel-control hidden-xs" href="#main-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+	</div> 
+
+</section><!--/#home-->
+
+<section id="about-us">
+	<div class="container">
+		<div class="text-center">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h2 class="title-one">UNIVERSIDAD POLITÉCNICA DEL VALLE DE TOLUCA</h2>
+			</div>
+		</div>
+		<div class="about-us">
+			<div class="row">
+				<div class="col-sm-6">
+					<h3>Nuestros valores</h3>
+					<ul class="nav nav-tabs">
+						<li><a href="#mission" data-toggle="tab"><i class="fa fa-th-large"></i> Mision</a></li>
+						<li><a href="#vision" data-toggle="tab"><i class="fa fa-th-large"></i> Vision 2020</a></li>
+						<li><a href="#valores" data-toggle="tab"><i class="fa fa-users"></i> Valores</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="about">
+							<div class="media">
+							<!--	<img class="pull-left media-object" src="images/about-us/about.jpg" alt="about us"> -->
+								<div class="media-body">
+									<p>Contribuir al desarrollo tecnológico nacional mediante la formación de profesionistas y postgraduados en investigación y desarrollo tecnológico, y la prestación de servicios de actualización y solución de problemas    técnicos a los sectores público y privado, en un marco de valores que considere primordialmente el desarrollo humano y la preservación del medio ambiente.</p>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="mission">
+							<div class="media">
+								<!--<img class="pull-left media-object" src="images/about-us/mission.jpg" alt="Mission"> -->
+								<div class="media-body">
+									<p>Contribuir al desarrollo nacional mediante la formación de profesionistas y postgraduados en investigación y desarrollo tecnológico, y la presentación de servicios de actualización y solución de problemas técnicos a los sectores públicos y privados, en un marco de valores que considere primordialmente el desarrollo humano y la preservación.</p>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="vision">
+							<div class="media">
+								<!--<img class="pull-left media-object" src="images/about-us/mission.jpg" alt="Mission"> -->
+								<div class="media-body">
+									<p>Ser una Institución de Educación Superior con programas educativos de calidad, que cumple con las expectativas de   la comunidad universitaria, el sector productivo y la sociedad; con egresados competitivos, integrados al ámbito   laboral en su disciplina y con capacidades para el autoempleo; también cuenta con una planta académica certificada   y comprometida; reconocida por el impulso a la ciencia e investigación, así como los servicios tecnológicos y de educación continua que ofrece; mediante sistemas consolidados y certificados, logrando impacto social sobre nuestro    entorno a través  de la equidad, los valores  y actitudes positivas de la comunidad UPVT. </p>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="valores">
+							<div class="media">
+								<!--<img class="pull-left media-object" src="images/about-us/community.jpg" alt="Community"> -->
+								<div class="media-body">
+									<b>Compromiso: </b>
+									<p>establecerse metas, asumir la responsabilidad de su cumplimiento y lograr los objetivos en tiempo y forma</p>
+									<b>Respeto: </b>
+									<p>considerar las opiniones y puntos de vista de los demás desde un enfoque de tolerancia y trato digno. Aceptar las diferencias económicas, culturales, de raza, físicas e ideológicas.</p>
+									<b>Honestidad: </b>
+									<p>actura con apego a la verdad y sujetarse a trasparencia, teniendo como norma congruencia entre pensar, sentir y actuar.</p>
+									<b>Justicia: </b>
+									<p>darle a cada individuo lo que le corresponde, mediante el establecimiento de reglas que permitan evaluar un acto.</p>
+									<b>Trabajo en equipo: </b>
+									<p>sinergia de ezfuerzos y capacidades de un grupo de trabajo, para el logro de objetivos y metas en común.</p>
+									<b>Sustentabilidad: </b>
+									<p>respeto y preservación del medio ambiente y toda forma de vida.</p>
+									<b>Excelencia: </b>
+									<p>logro de los objetivos, superando las expectativas en cuanto a ejecución y resultados.</p>
+									<b>Equidad: </b>
+									<p>Permitir la igualdad de partcipación de hombres y mujeres en las actividades universitarias, permitiéndoles gozar de sus derechos, desarrollar sus talentos y habilidades, y proyectandolos hacia la sociedad en general.</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<h3>Video Institucional</h3>
+					<div class="skill-bar">
+						
+						   
+						     <video controls="controls" width="90%" >
+						       <source src="{%static 'video/UPVT.mp4' %}" type="video/mp4" />
+						     </video>
+												
+					</div> <!-- End Skill Bar -->
+				</div>
+			</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#about-us-->
+	<section id="mexiquense">
+		<div class="container">
+			<div class="about-us">
+				<div class="row">
+
+					<div class="col-sm-6">
+						
+						<div class="skill-bar">
+							
+							   
+							<video controls="controls" width="90%" >
+							  <source src="{%static 'video/MEXIQUENSE.mp4'%}" type="video/mp4" />
+							</video>
+													
+						</div> <!-- End Skill Bar -->
+					</div>
+					<div class="col-sm-6">
+						<h3>Soy mexiquense</h3>
+						<p>Este es un tributo a las bellezas naturales, arquitectónicas, a la cultura y a la gente del Estado de México; gente que nació aquí o en otro lugar, pero que aquí tienen su hogar; gente que ha puesto su trabajo, que ha puesto su talento y su empeño para construir este gran estado que hoy te presentamos y que nos hace decir con orgullo: Yo Soy Mexiquense.</p>
+						
+					</div>
+				</div>
+					</div>
+				</div>
+			</div>
+		</section><!--/#about-mexiqueense-->
+	
+
+{% endblock %}	

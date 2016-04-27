@@ -1,0 +1,116 @@
+{% extends 'base.html'%}
+{% load static from staticfiles %}
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top" role="banner"> 
+	<div class="container"> 
+				<div class="navbar-header"> 
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+					</button> 
+					<a class="navbar-brand" href="#"><h1><img src="{% static 'images/gob.jpg' %}" alt="logo"></h1></a> 
+					
+
+
+				</div> 
+				<div class="collapse navbar-collapse"> 
+					<ul class="nav navbar-nav navbar-right"> 
+						<li class="scroll"><a href="{% url 'home:home' %}">Inicio</a></li> 
+						<li class="scroll"><a href="{% url 'careers:carreras' %}">Carreras</a></li> 
+						<li class="scroll active"><a href="{% url 'academics:academics' %}">Academicos</a></li> 
+						<li class="scroll"><a href="{% url 'vacancies:index'%}">Empleos</a></li> 
+						<li class="scroll"><a href="#blog">Eventos</a></li> 
+						<li class="scroll"><a href="{% url 'gripbox:index'%}">Buzon de sugerencias</a></li> 
+						
+					</ul> 
+					<img style="margin-top: 15px;" src="{% static 'images/Logo.jpg' %}" alt="Logo.jpg">
+				</div>
+			</div> 
+
+</div><!--/navbar--> 
+{% endblock %}		
+{% block content%}
+
+	<section id="our-team">
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-sm-8 col-sm-offset-2">
+					<br>
+					<
+					<h4>Selecciona la carrera: </h4>
+					  <select >
+					  	<option value="informatica">Informatica</option>
+					  	<option value="informatica">Industrial</option>
+					  	<option value="informatica">Mecatronica</option>
+					  	<option value="informatica">Energia</option>
+					  	<option value="informatica">Negocios Internacionales</option>
+					  </select>
+					
+				</div>
+
+			</div>
+			
+			<div id="team-carousel" class="carousel slide" data-interval="false">
+				<a class="member-left" href="#team-carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+				<a class="member-right" href="#team-carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+				<div class="carousel-inner team-members">
+					<div class="row item active">
+						{% for teacher in teachers %}
+							<div class="col-sm-6 col-md-3">
+							<div class="single-member">
+								<img src="{{teacher.img.url}}" alt="team member" style="width: 210px;height: 210px;" />
+								<h4>{{filas.teacher.fullName}}</h4>
+								<h5>{{teacher.position}}</h5>
+								<p>Academia: {{teacher.academy}}</p>
+								<div class="socials">
+									<a href="#"><i class="fa fa-google-plus"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+						<div class="col-sm-6 col-md-3">
+							<div class="single-member">
+								<img src="{%static 'images/our-team/member2.jpg'%}" alt="team member" />
+								<h4>Trinidad Perez Maris</h4>
+								<h5></h5>
+								<p>Profesor de tiempo completo</p>
+								<p>Academia: Desarrollo Humano </p>
+								<div class="socials">
+									<a href="#"><i class="fa fa-google-plus"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="single-member">
+								<img src="{% static 'images/our-team/member3.jpg'%}" alt="team member" />
+								<h4>Angelica Montejo Perez</h4>
+								<h5>Profesor de tiempo completo</h5>
+								<p>Academia: Ciencias Basicas</p>
+								<div class="socials">
+									<a href="#"><i class="fa fa-google-plus"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="single-member">
+								<img src="{%static 'images/our-team/member4.jpg'%}" alt="team member" />
+								<h4>Jose Luis Ledezma Sanchez</h4>
+								<h5>Profesor de Tiempo Completo</h5>
+								<p>Academia:Proyectos y Base de datos</p>
+								<div class="socials">
+									<a href="#"><i class="fa fa-google-plus"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section><!--/#Our-Team-->
+	
+{% endblock %}	

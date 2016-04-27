@@ -1,0 +1,140 @@
+{%extends 'base.html'%}
+{% load static from staticfiles %} 
+{% block navbar %}
+	<div class="navbar navbar-inverse navbar-fixed-top" role="banner"> 
+		<div class="container"> 
+			<div class="navbar-header"> 
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+				</button> 
+				<a class="navbar-brand" href="#"><h1><img src="{% static 'images/gob.jpg' %}" alt="logo"></h1></a> 
+				
+
+
+			</div> 
+			<div class="collapse navbar-collapse"> 
+				<ul class="nav navbar-nav navbar-right"> 
+					<li class="scroll"><a href="{% url 'home:home' %}">Inicio</a></li> 
+					<li class="scroll"><a href="{% url 'careers:carreras' %}">Carreras</a></li> 
+					<li class="scroll"><a href="{% url 'academics:academics' %}">Academicos</a></li> 
+					<li class="scroll active"><a href="{% url 'vacancies:index'%}">Empleos</a></li> 
+					<li class="scroll"><a href="{% url 'events:index'%}">Eventos</a></li> 
+					<li class="scroll"><a href="{% url 'gripbox:index'%}">Buzon de sugerencias</a></li> 
+					
+				</ul> 
+				<img style="margin-top: 15px;" src="{% static 'images/Logo.jpg' %}" alt="Logo.jpg">
+			</div>
+		</div> 
+
+	</div><!--/navbar--> 
+
+{% endblock %}
+{% block content %}
+
+	<section class="blog-header section-padding"><!-- blog-header -->
+	  <div class="container"><!-- container -->
+	    <div class="row"><!-- row -->
+	      <div class="col-xs-12"><!-- col-xs-12 -->
+	        <h1 class="section-title text-center">Bolsa de trabajo</h1>
+	      </div><!-- /.col-xs-12 -->
+	    </div><!-- /.row -->
+	  </div><!-- /.container -->
+	</section><!-- /.blog-header -->
+	<section id="blog"> 
+		<div class="container">
+			<div class="row text-center clearfix">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h4>Selecciona la carrera: </h4>
+					    <form  action="{% url 'vacancies:index'%}" method="POST">
+					      {% csrf_token %}
+					         
+					            
+					               {{form}}
+					                <button type="submit" class="btn btn-default" aria-label="Left Align">
+					                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					                </button>
+					                
+					                           	                                 
+					  </form>
+				</div>
+			</div> 
+			</form>
+			</br>
+			
+			{% for vacancy in vacancies %}
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="single-blog">
+							
+							<h2>{{vacancy.company}}</h2>
+							<ul class="post-meta">
+								<li><i class="fa fa-pencil-square-o"></i><strong> Carrera:</strong>{{vacancy.career}}</li>
+								<li><i class="fa fa-clock-o"></i><strong> Fecha:</strong>{{vacancy.pubDate}}</li>
+							</ul>
+							<div class="blog-content">
+								<p>{{vacancy.description}}</p>
+							</div>
+
+							{% if vacancy.pdf.url != None  %}
+							<a href="{{vacancy.pdf.url}}" class="btn btn-primary" data-toggle="modal" data-target="#blog-detail">Enviar a correo</a>
+							{% endif %}
+						</div>
+					</div>		
+				</div> 
+			{% endfor %}
+		</div> 
+		</section> <!--/#blog-->		
+		<div class="row text-center clearfix">
+			<div class="col-sm-8 col-sm-offset-2">		
+				  <nav>
+				    <ul class="pagination">
+				  	{% if vacancies.has_previous %}
+				  	<li>
+				  	  <a href="?page={{ vacancies.previous_page_number }}" aria-label="Previous">
+				  	    <span aria-hidden="true">&laquo;</span>
+				  	  </a>
+				  	</li>
+				  	{% endif %}
+				  	
+				  	{% for _ in vacancies.paginator.page_range %}
+				  		
+				  		{% if vacancies.number == forloop.counter %}	
+				  			<li class="active"><a href="?page={{forloop.counter}}">{{forloop.counter}}<span class="sr-only">(current)</span></a></li>
+				  			{%else%}
+				  			<li><a href="?page={{forloop.counter}}">{{forloop.counter}}<span class="sr-only">(current)</span></a></li>
+				  		{% endif %}
+				  	{% endfor %}
+
+				  	{% if vacancies.has_next%}
+				  	<li>
+				  	  <a href="?page={{ vacancies.next_page_number }}" aria-label="Next">
+				  	    <span aria-hidden="true">&raquo;</span>
+				  	  </a>
+				  	</li>
+				  	{% endif %}
+				    </ul>
+				  </nav>
+			</div>
+		</div> 
+		
+{% endblock %}
+
+					
+
+	<footer id="footer"> 
+		<div class="container"> 
+			<div class="text-center"> 
+				<p>Copyright &copy; 2016 - <a href="http://mostafiz.me/">Universidad Politécnica del Valle de Toluca</a> | All Rights Reserved</p> 
+			</div> 
+		</div> 
+	</footer> <!--/#footer--> 
+
+	<script type="text/javascript" src="js/jquery.js"></script> 
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/smoothscroll.js"></script> 
+	<script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+	<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script> 
+	<script type="text/javascript" src="js/jquery.parallax.js"></script> 
+	<script type="text/javascript" src="js/main.js"></script> 
+</body>
+</html>

@@ -1,0 +1,178 @@
+{% extends 'base.html'%}
+{% load static from staticfiles %} 
+{% block title %}UPVT{% endblock %}
+{% block navbar %}
+	<div class="navbar navbar-inverse navbar-fixed-top" role="banner"> 
+		<div class="container"> 
+			<div class="navbar-header"> 
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+				</button> 
+				<a class="navbar-brand" href="#"><h1><img src="{% static 'images/gob.jpg' %}" alt="logo"></h1></a> 
+				
+
+
+			</div> 
+			<div class="collapse navbar-collapse"> 
+				<ul class="nav navbar-nav navbar-right"> 
+					<li class="scroll"><a href="{% url 'home:home' %}">Inicio</a></li> 
+					<li class="scroll active"><a href="{% url 'careers:carreras' %}">Carreras</a></li> 
+					<li class="scroll"><a href="{% url 'academics:academics' %}">Academicos</a></li> 
+					<li class="scroll"><a href="{% url 'vacancies:index'%}">Empleos</a></li> 
+					<li class="scroll"><a href="#blog">Eventos</a></li> 
+					<li class="scroll"><a href="{% url 'gripbox:index'%}">Buzon de sugerencias</a></li> 
+				</ul> 
+				<img style="padding-top:15px;"src="{% static 'images/Logo.jpg' %}" alt="Logo.jpg">
+			</div>
+		</div> 
+
+	</div><!--/navbar--> 
+
+{% endblock %}
+{% block content %}
+	
+	<br>
+	<section id="services" class="parallax-section">
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-sm-8 col-sm-offset-2">
+					<h2 class="title-one">Carreras</h2>
+					<p>En La Universidad Politécnica del Valle de Toluca, podrás estudiar alguno de los siete programas:</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="our-service">
+						<div class="services row">
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-laptop"></i>
+									<h2>Ingeniería en Informática</h2>
+									<p>Descripción.</p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-gears"></i>
+									<h2>Ingeniería en Mecatronica</h2>
+									<p>Descripción.</p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-industry"></i>
+									<h2>Ingeniería Industrial</h2>
+									<p>Descripción.</p>
+								</div>
+							</div>
+						</div>
+						<div class="services row">
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-flask"></i>
+									<h2>Ingeniería en Biotecnología</h2>
+									<p>Descripción.</p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-car"></i>
+									<h2>Ingeniería en Mecánica Automotriz</h2>
+									<p>Descripción.</p>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-flash"></i>
+									<h2>Ingeniería Energía</h2>
+									<p>Descripción.</p>
+								</div>
+							</div>
+						</div>
+						<div class="services row">
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-money"></i>
+									<h2>Negocios Internacionales</h2>
+									
+									<a type="button" class="btn btn-default" href="http://www.google.com">Descripción</a>
+									
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="single-service">
+									<i class="fa fa-bar-chart "></i>
+									<h2>Maestría en Administración</h2>
+									<p>Descripción </p>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+				</div>
+			</div>
+		</section><!--/#service-->	
+		<section id="clients" class="parallax-section">
+			<div class="container">
+				<div class="clients-wrapper">
+					<div class="row text-center">
+						<div class="col-sm-8 col-sm-offset-2">
+							<h2 class="title-one">Lo que dicen nuestros estudiantes</h2>
+							
+						</div>
+					</div>
+					<div id="clients-carousel" class="carousel slide" data-ride="carousel"> <!-- Indicators -->
+						<ol class="carousel-indicators">
+						{% for student in students %}
+							{% if forloop.counter0 == 0 %}
+							<li data-target="#clients-carousel" data-slide-to="0" class="active"></li>
+							{% else %}
+							<li data-target="#clients-carousel" data-slide-to="{{forloop.counter0}}"></li>	
+							{% endif %}
+						{% endfor %}
+							
+						</ol> <!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							{% for student in students %}
+								{% if forloop.counter0 == 0%}
+									<div class="item active">
+										<div class="single-client">
+											<div class="media">
+												<img st class="pull-left" src="{{student.img.url}}" style ="width:150px;height:150px" alt="">
+												<div class="media-body">
+													<blockquote>
+														<p>Carrera:{{student.career}}</p>
+														<small>{{student.comment}} </small>
+													 </blockquote>
+												</div>
+											</div>
+										</div>
+									</div>
+								{%else%}
+								<div class="item">
+										<div class="single-client">
+											<div class="media">
+												<img st class="pull-left" src="{{student.img.url}}" style ="width:150px;height:150px" alt="">
+												<div class="media-body">
+													<blockquote>
+														<p>Carrera:{{student.career}}</p>
+														<small>{{student.comment}} </small>
+													 </blockquote>
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endif %}
+							
+							{% endfor %}
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--/#clients-->		
+
+
+{% endblock %}

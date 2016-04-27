@@ -1,0 +1,79 @@
+{%extends 'base.html'%}
+{%load static from staticfiles%}
+{%block title%}UPVT{%endblock%}
+{% block navbar %}
+	<div class="navbar navbar-inverse navbar-fixed-top" role="banner"> 
+		<div class="container"> 
+			<div class="navbar-header"> 
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+				</button> 
+				<a class="navbar-brand" href="#"><h1><img src="{% static 'images/gob.jpg' %}" alt="logo"></h1></a> 
+				
+
+
+			</div> 
+			<div class="collapse navbar-collapse"> 
+				<ul class="nav navbar-nav navbar-right"> 
+					<li class="scroll active"><a href="{% url 'home:home' %}">Inicio</a></li> 
+					<li class="scroll"><a href="{% url 'careers:carreras' %}">Carreras</a></li> 
+					<li class="scroll"><a href="{% url 'academics:academics' %}">Academicos</a></li> 
+					<li class="scroll"><a href="{% url 'vacancies:index'%}">Empleos</a></li> 
+					<li class="scroll"><a href="{% url 'events:index'%}">Eventos</a></li> 
+					<li class="scroll"><a href="{% url 'gripbox:index'%}">Buzon de sugerencias</a></li> 
+					
+				</ul> 
+				<img style="margin-top: 15px;" src="{% static 'images/Logo.jpg' %}" alt="Logo.jpg">
+			</div>
+		</div> 
+
+	</div><!--/navbar--> 
+
+{% endblock %}
+
+{% block content %}
+</br>
+<section id="contact">
+	<div class="container">
+		<div class="row text-center clearfix">
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="contact-heading">
+					<h2 class="title-one">Buzon de sugerencias</h2>
+					<p>El buzón de sugerencias y quejas son instrumentos puestos a disposición de los miembros de la comunidad universitaria  para hacernos llegar las observaciones y reclamaciones que estimen convenientes sobre el funcionamiento, así como para la mejora de la calidad de los servicios.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="contact-details">
+			<div class="pattern"></div>
+			<div class="row text-center clearfix">
+				
+				<div class="col-sm-12"> 
+					<div id="contact-form-section">
+						<div class="status alert alert-success" style="display: none"></div>
+						<form id="contact-form" class="contact" name="contact-form" method="post" action="{% url 'gripbox:index'%}">
+						{% csrf_token %}
+							<div class="form-group">
+								{{form.name}}
+								<div class="form-group">
+								{{form.email}}
+								</div> 
+								<div class="form-group">
+								{{form.comentario}}
+								</div> 
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Enviar</button>
+								</div>
+							</form> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</section> <!--/#contact--> 
+
+
+{% endblock %}		
+
+	
